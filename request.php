@@ -44,13 +44,13 @@ class Request {
                 CURLOPT_HTTPHEADER => $headers
             );
         } else {
+	    $paramsGet = $this->getGetParams($data);
             $curlParams = array(
                 CURLOPT_URL => $this->url.'?'.$paramsGet,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HTTPGET => true,
                 CURLOPT_HTTPHEADER => $headers,
             );
-            $paramsGet = $this->getGetParams($data);
         }
         curl_setopt_array($curl, $curlParams);
         return $curl;
