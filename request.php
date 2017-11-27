@@ -31,7 +31,6 @@ class Request {
     }
 
     private function initCurl($data, $headers, $isPost = true) {
-        $paramsGet = '';
         $curlParams = array();
 
         $curl = curl_init();
@@ -44,9 +43,8 @@ class Request {
                 CURLOPT_HTTPHEADER => $headers
             );
         } else {
-	    $paramsGet = $this->getGetParams($data);
             $curlParams = array(
-                CURLOPT_URL => $this->url.'?'.$paramsGet,
+                CURLOPT_URL => $this->url.'?'.$this->getGetParams($data),
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HTTPGET => true,
                 CURLOPT_HTTPHEADER => $headers,
