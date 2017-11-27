@@ -34,9 +34,6 @@ class Request {
         $paramsGet = '';
         $curlParams = array();
 
-        if(!$isPost)
-            $paramsGet = $this->getGetParams($data);
-
         $curl = curl_init();
         if($isPost) {
            $curlParams = array(
@@ -53,6 +50,7 @@ class Request {
                 CURLOPT_HTTPGET => true,
                 CURLOPT_HTTPHEADER => $headers,
             );
+            $paramsGet = $this->getGetParams($data);
         }
         curl_setopt_array($curl, $curlParams);
         return $curl;
